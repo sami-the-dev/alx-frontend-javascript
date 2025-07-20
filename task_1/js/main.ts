@@ -15,6 +15,27 @@ interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
+interface IStudentClass {
+  firstName: string;
+  lastName: string;
+  workOnHomework(): string;
+  dispalyName(): string;
+}
+
+interface PersonConstructor {
+  new (firstName: string, lastName: string): IStudentClass;
+}
+
+class StudentClass implements IStudentClass {
+  constructor(public firstName: string, public lastName: string) {}
+  workOnHomework() {
+    return "Currently working ";
+  }
+  dispalyName() {
+    return this.firstName;
+  }
+}
+
 const teacher3: Teacher = {
   firstName: "John",
   fullTimeEmployee: false,
