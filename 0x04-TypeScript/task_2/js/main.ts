@@ -13,6 +13,10 @@ interface TeacherInterface {
 interface IIsDirector {
   (employee: TeacherInterface | DirectorInterface): boolean;
 }
+enum Subjects {
+  "Math",
+  "History",
+}
 
 class Director implements DirectorInterface {
   workFromHome(): string {
@@ -56,5 +60,13 @@ const executeWork = (employee: TeacherInterface | DirectorInterface) => {
     return (employee as DirectorInterface).workDirectorTasks();
   } else if (isDirector(employee)) {
     return (employee as TeacherInterface).workTeacherTasks();
+  }
+};
+
+const teachClass = (todayClass: Subjects) => {
+  if (todayClass === Subjects.Math) {
+    return "Teaching Math";
+  } else if (todayClass === Subjects.History) {
+    return "Teaching History";
   }
 };
