@@ -10,6 +10,10 @@ interface TeacherInterface {
   workTeacherTasks(): string;
 }
 
+interface IIsDirector {
+  (employee: TeacherInterface | DirectorInterface): boolean;
+}
+
 class Director implements DirectorInterface {
   workFromHome(): string {
     return "workFromHome ";
@@ -40,3 +44,17 @@ function createEmployee(
   if (Number(salary) < 500) return new Teacher();
   return new Director();
 }
+
+const isDirector: IIsDirector = (
+  employee: TeacherInterface | DirectorInterface
+) => {
+  return employee instanceof Director;
+};
+
+const executeWork = (employee: TeacherInterface | DirectorInterface) => {
+  if (isDirector(employee)) {
+    return (employee as DirectorInterface).workDirectorTasks();
+  } else if (isDirector(employee)) {
+    return (employee as TeacherInterface).workTeacherTasks();
+  }
+};
